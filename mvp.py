@@ -27,7 +27,11 @@ def run():
     urls = list(set(urls))
 
     # The particular url to post
-    use_url = urls[0]
+    if len(urls) == 0:
+        print('No tweets with urls, returning None')
+        return None
+    else:
+        use_url = urls[0]
 
     # Posts the url
     val = api.update_status('fascinating read about #%s %s' % (SEARCH_TERM, use_url))
