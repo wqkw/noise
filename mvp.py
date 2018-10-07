@@ -1,10 +1,10 @@
 import config as config
 import tweepy
-
+import random
 
 def run():
     # Specify what to search for on twitter
-    SEARCH_TERM = 'corn prices'
+    SEARCH_TERM = 'stablecoin'
 
     # Authentication
     auth = tweepy.OAuthHandler(config.API_KEY, config.API_SECRET)
@@ -34,7 +34,11 @@ def run():
         use_url = urls[0]
 
     # Posts the url
-    val = api.update_status('fascinating read about #%s %s' % (SEARCH_TERM, use_url))
+    adj = random.choice(['Interesting', 'Cool', 'Fascinating', 'Intriguing', 'Compelling', 'Great'])
+    noun = random.choice(['article', 'piece', 'feature'])
+    outtro = random.choice(['Definitely worth checking out!', 'Check it out!', 'Worth giving it a read!'])
+    status_format = '{} {} on #{}. {} {}'.format(adj, noun, SEARCH_TERM, outtro ,use_url)
+    val = api.update_status(status_format)
     return val.id
 
 
